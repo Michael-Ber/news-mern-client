@@ -4,7 +4,7 @@ import noImage from '../../assets/no_image.jpg';
 
 const LatestPostItem = ({category, title, author, url, urlToImage, date}) => {
 
-    const titleEdited = title.length > 50 ? title.slice(0, 50) + ' ...': title;
+    const titleEdited = title && title.length > 50 ? title.slice(0, 50) + ' ...': title;
     const authorEdited = author ? author : 'От редакции';
     const editedImg = urlToImage ? urlToImage : noImage;
  
