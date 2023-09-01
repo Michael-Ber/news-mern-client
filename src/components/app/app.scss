@@ -1,0 +1,16 @@
+.app {
+    margin: 0 auto;  
+}
+
+.btn {
+    background-color: #f36326;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+        background-color: darken(#f36326, 10%);
+    }
+}

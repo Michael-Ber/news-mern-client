@@ -1,0 +1,8 @@
+.tabs-app-main {
+    &__items {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-top: 70px;
+    }
+}

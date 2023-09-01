@@ -1,0 +1,71 @@
+.app-main {
+    display: flex;
+    justify-content: space-between;
+    padding: 80px 105px 50px 105px;
+    background-color: #909090;
+    color: #fff;
+    @media(max-width: 1199px) {
+        padding: 80px 50px 50px 50px;
+    }
+    @media(max-width: 991px) {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    @media(max-width: 575px) {
+        padding: 80px 20px 50px 20px;
+    }
+    &__left {
+        flex: 0 0 calc(60% - 60px);
+        
+        @media(max-width: 1299px) {
+            flex: 0 0 calc(50% - 60px);
+        }
+        @media(max-width: 991px) {
+            flex: 0 0 90%;
+        }
+    }
+    &__right {
+        flex: 0 0 calc(40% - 60px);
+        @media(max-width: 1299px) {
+            flex: 0 0 calc(50% - 60px);
+        }
+        @media(max-width: 991px) {
+            flex: 0 0 90%;
+            margin-top: 30px;
+        }
+    }
+    &__header {
+        display: flex;
+        gap: 15px;
+    }
+    &__category {
+        text-transform: capitalize;
+        font-size: 16px;
+        font-weight: 700;
+    }
+    &__title {
+        font-size: 60px;
+        margin-top: 30px;
+        @media(max-width: 1499px) {
+            font-size: 50px;
+        }
+        @media(max-width: 1299px) {
+            font-size: 40px;
+        }
+        @media(max-width: 1199px) {
+            font-size: 30px;
+        }
+        @media(max-width: 575px) {
+            font-size: 20px;
+        }
+    }
+    &__link {
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+

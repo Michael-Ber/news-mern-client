@@ -1,0 +1,10 @@
+.search-page {
+    padding: 0 105px;
+    margin-top: 60px;
+    &__title {
+        margin-bottom: 30px;
+    }
+    @media(max-width: 1199px) {
+        padding: 0 50px;
+    }
+}

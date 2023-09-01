@@ -1,0 +1,54 @@
+.app-recommended {
+    margin-top: 120px;
+    padding: 0 105px;
+    @media(max-width: 575px) {
+        padding: 0 20px;
+    }
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 65px;
+        @media(max-width: 767px) {
+            flex-direction: column;
+        }
+    }
+    &__title {
+        @media(max-width: 767px) {
+            font-size: 20px; 
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+    }
+   
+    
+    &__carousel {
+        overflow: hidden;
+    }
+    &__carousel-wrapper {
+        width: 100%;
+    }
+    &__list {
+       display: flex;
+       gap: 15px; 
+       transition: .3s all ease-in;
+    }
+    &__more {
+        display: block;
+        margin: 60px auto 0 auto;
+    }
+}
+
+.recommended-opacity-enter {
+    opacity: 0;
+}
+.recommended-opacity-enter-active {
+    opacity: 1;
+    transition: opacity 2500ms;
+}
+.recommended-opacity-exit {
+    opacity: 1;
+}
+.recommended-opacity-exit-active {
+    opacity: 0;
+    transition: opacity 2500ms;
+}

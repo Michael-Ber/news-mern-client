@@ -1,0 +1,40 @@
+.app-recommended {
+    &__pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__nums {
+        display: flex;
+        margin: 0 30px;
+        @media(max-width: 575px) {
+            margin: 0 15px;
+        }
+        .invisible {
+            display: none;
+        }
+        .visible {
+            display: flex;
+        }
+    }
+    &__num {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+        cursor: pointer;
+        &_active {
+            background-color: #109be9;
+            color: #fff;
+            border-radius: 5px;
+        }
+        & + & {
+            margin-left: 15px;
+            @media(max-width: 575px) {
+                margin-left: 10px;
+            }
+        }
+    }
+}
