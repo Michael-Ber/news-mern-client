@@ -19,7 +19,6 @@ const CurrentNews = memo(({news, category}) => {
         setCurrentNews(firstNews)
     }, [firstNews])
 
-    console.log(firstNews);
     const NewContentWithDate = withDate(NewsContent, {category, ...currentNews})
 
     return (
@@ -29,7 +28,6 @@ const CurrentNews = memo(({news, category}) => {
             </div>
             <div className="tabs-app-main__items">
                 {news && news.slice(0, 2).map((item, i) => {
-                    console.log(item);
                     return <NewsItem key={nanoid()} {...item} activeNews={activeNews} elementNumber = {i} handleNews={() => handleNews(i)}/>
                 })}
             </div>

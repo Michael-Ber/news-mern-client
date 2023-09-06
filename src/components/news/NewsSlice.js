@@ -6,6 +6,7 @@ import { newsService } from "../../service/newsService";
 const initialState = {
     articles: [],
     searchedArticles: [],
+    moreArticles: [],
     category: 'general',
     country: 'us',
     language: 'ru',
@@ -61,7 +62,8 @@ const mainSlice = createSlice({
         categoryChanged: (state, action) => {state.category = action.payload},
         countryChanged: (state, action) => {state.country = action.payload},
         searchRequestChanged: (state, action) => {state.searchRequest = action.payload},
-        changeAmount: (state) => { state.amount += 8 }
+        changeAmount: (state) => { state.amount += 8 },
+        loadMoreArticles: (state, action) => { state.moreArticles = [...state.moreArticles, ...action.payload] }
     },
     extraReducers: builder => {
         builder 
@@ -87,5 +89,6 @@ export const {
     fetchingSearchNews,
     fetchedSearchNEws,
     fetchingSearchNEwsError,
-    changeAmount
+    changeAmount,
+    loadMoreArticles
 } = actions;

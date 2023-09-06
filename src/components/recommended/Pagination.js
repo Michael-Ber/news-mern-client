@@ -1,64 +1,76 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { returnPaginationRange } from '../utils/returnPaginationRange';
 import { findParentNodeAfterClick } from '../utils/findNodeAfterClick';
 import Arrow from '../arrow/Arrow';
 import './pagination.scss';
 
-const Pagination = ({totalPage, totalSlides, page, limit, siblings, setSlide, setOffset, translateWidth, carouselWidth}) => {
+const Pagination = ({totalPage, totalSlides, page, limit, siblings, translateWidth, carouselWidth, refToSlider, news}) => {
 
 
-    const paginationElements = returnPaginationRange(totalPage, page, limit, siblings).map((number, i) => {
-        const classNames = page === number ? "app-recommended__num app-recommended__num_active" : "app-recommended__num";
+    
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
+    const [offset, setOffset] = useState(0);
+    const [slide, setSlide] = useState(1);
+
+
+    const paginationElements = returnPaginationRange(totalPage, slide, limit, siblings).map(number => {
+        const classNames = slide === number ? "app-recommended__num app-recommended__num_active" : "app-recommended__num"; //instead of slide was page
         return (
             <span onClick={() => {setSlide(number); setOffset((number-1)*translateWidth)}} key={number} className={classNames}>{number}</span>
         )
     })
-    const prevRef = useRef(null);
-    const nextRef = useRef(null);
+
+    useEffect(() => {
+        refToSlider.current.style.width = `${carouselWidth}px`;
+        refToSlider.current.style.transform = `translateX(${-offset}px)`;
+        if(news.length === 0) {
+            refToSlider.current.style.width = `200px`
+        }
+    }, [offset])
 
     const handlePrevClick = (e, nextRef) => {
-        setSlide(prevSlide => prevSlide === totalSlides.length-2 ? prevSlide - 2: prevSlide-1)
-        setOffset(prevOffset => {
-            const button = findParentNodeAfterClick(e.target, 'BUTTON');
-            const svg = findParentNodeAfterClick(e.target, 'svg');
-            const nextButton = nextRef.current.children[0];
-            const nextButtonSvg = nextRef.current.children[0].children[0];
-            nextButtonSvg.style.stroke = '#f3692e';
-            nextButton.disabled = false;
-            button.disabled = false;
-            if(prevOffset < 1 * translateWidth) {
-                button.disabled = true;
-                setSlide(1)
-                return prevOffset
-            }
-            if(prevOffset < 2 * translateWidth) {
-                svg.style.stroke = '#e0e0e0';
-            }
-            return prevOffset - translateWidth
-        })
-
+        const button = findParentNodeAfterClick(e.target, 'BUTTON');
+        const svg = findParentNodeAfterClick(e.target, 'svg');
+        const nextButton = nextRef.current.children[0];
+        const nextButtonSvg = nextRef.current.children[0].children[0];
+        if(!button.disabled) {
+            setSlide(prevSlide => prevSlide === totalSlides.length-2 ? prevSlide - 2: prevSlide-1)
+            setOffset(prevOffset => {
+                
+                nextButtonSvg.style.stroke = '#f3692e';
+                nextButton.disabled = false;
+                button.disabled = false;
+                if(prevOffset < 2 * translateWidth) {
+                    button.disabled = true;
+                    setSlide(1)
+                    svg.style.stroke = '#e0e0e0';
+                }
+                return prevOffset - translateWidth
+            })
+        }
+        
     }
     const handleNextClick = (e, prevRef) => {
-        setSlide(prevSlide => prevSlide + 1)
-        setOffset(prevOffset => {
-            const button = findParentNodeAfterClick(e.target, 'BUTTON');
-            const svg = findParentNodeAfterClick(e.target, 'svg');
-            const prevButton = prevRef.current.children[0];
-            const prevButtonSvg = prevRef.current.children[0].children[0];
-            prevButtonSvg.style.stroke = '#f3692e';
-            prevButton.disabled = false;
-            button.disabled = false;
-            if(Math.abs(prevOffset + 2 * translateWidth) >= carouselWidth) {
-                button.disabled = true;
-                setSlide(totalSlides - 1)
-                return prevOffset
-            }
-            if(Math.abs(prevOffset + 3 * translateWidth) >= carouselWidth) {
-                svg.style.stroke = '#e0e0e0';
-            }
-
-            return prevOffset + translateWidth
-        })
+        const button = findParentNodeAfterClick(e.target, 'BUTTON');
+        const svg = findParentNodeAfterClick(e.target, 'svg');
+        const prevButton = prevRef.current.children[0];
+        const prevButtonSvg = prevRef.current.children[0].children[0];
+        if(!button.disabled) {
+            setSlide(prevSlide => prevSlide + 1)
+            setOffset(prevOffset => {
+                
+                prevButtonSvg.style.stroke = '#f3692e';
+                prevButton.disabled = false;
+                button.disabled = false;
+                if(Math.abs(prevOffset + 2 * translateWidth) >= carouselWidth) {
+                    svg.style.stroke = '#e0e0e0';
+                    button.disabled = true;
+                }
+    
+                return prevOffset + translateWidth
+            })
+        }
     }
     
     return (
