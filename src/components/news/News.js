@@ -11,7 +11,6 @@ const News = () => {
 
     useEffect(() => {
         if(!showSearchResultCount) {
-            console.log('here')
             dispatch(fetchNews({country, category}))
         }
     }, [category, country])

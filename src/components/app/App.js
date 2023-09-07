@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect, Suspense, lazy } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { categoryChanged, resetShowSearchResultsCount } from "../news/NewsSlice";
+import { resetShowSearchResultsCount } from "../news/NewsSlice";
 import { useDispatch } from "react-redux";
 import Header from "../header/Header";
 import './app.scss';
@@ -20,9 +20,7 @@ function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log(categoryFromUrl)
 		if(categoryFromUrl !== 'search_results') {
-			console.log('why')
 			dispatch(resetShowSearchResultsCount())
 		}
 	}, [categoryFromUrl])

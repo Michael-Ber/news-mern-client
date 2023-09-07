@@ -1,16 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchSearchNews } from '../news/NewsSlice';
+import { useSelector } from 'react-redux';
 import withDate from '../HOC/withDate';
 import SearchResultItem from '../../components/search/SearchResultItem';
 import './searchResult.scss';
 
 const SearchResult = () => {
     const news = useSelector(state => state.news.searchedArticles);
-    // const searchRequest = localStorage.getItem('searchRequest');
-    const { searchRequest } = useSelector(state => state.news)
-    const { language } = useSelector(state => state.news);
-    const dispatch = useDispatch();
     const renderNews = (arr) => {
         return arr.map(item => {
             const SearchResultItemWithDate = withDate(SearchResultItem, {...item});

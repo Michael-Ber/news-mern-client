@@ -1,6 +1,6 @@
 import withStoreData from '../HOC/withStoreData';
 import { useState, memo, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHttp } from "../hooks/http.hook";
 import { newsService } from "../../service/newsService";
 import LatestPostItem from './LatestPostItem';
@@ -36,9 +36,7 @@ const LatestPost = memo(({news, category}) => {
     }
     const elements = news ? news.map(item => {
             
-            // const LatestPostItemWithDate = withDate(LatestPostItem, {...item, category});
             return (
-                // <LatestPostItemWithDate key={item.id}/> //not working React.memo on LatestPostItem
                 <LatestPostItem key={item.id} {...item} category={category}/>
             )
             
@@ -46,9 +44,7 @@ const LatestPost = memo(({news, category}) => {
         }) : <h2>Статей нет</h2>
     const moreElements = moreNews && moreNews.map(item=> {
         
-            // const LatestPostItemWithDate = withDate(LatestPostItem, {...item, category});
             return (
-                // <LatestPostItemWithDate key={item.id}/>
                 <LatestPostItem key={item.id} {...item} category={category}/>
             )
         

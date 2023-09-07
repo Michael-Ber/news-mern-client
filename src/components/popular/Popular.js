@@ -2,7 +2,6 @@ import { memo } from 'react';
 import withStoreData from '../HOC/withStoreData';
 import PopularItem from './PopularItem';
 import withDate from '../HOC/withDate';
-import { nanoid } from '@reduxjs/toolkit';
 import './popular.scss';
 
 const Popular = memo(({news, category}) => {
@@ -11,7 +10,7 @@ const Popular = memo(({news, category}) => {
         return arr.slice(2, 7).map((item, i) => {
             const PopularItemWithDate = withDate(PopularItem, {...item, category});
             return (
-                <PopularItemWithDate key={nanoid()} />
+                <PopularItemWithDate key={item.id} />
             )
         })
     }
