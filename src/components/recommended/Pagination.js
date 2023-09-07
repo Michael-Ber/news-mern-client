@@ -14,10 +14,15 @@ const Pagination = ({totalPage, totalSlides, page, limit, siblings, translateWid
     const [slide, setSlide] = useState(1);
 
 
-    const paginationElements = returnPaginationRange(totalPage, slide, limit, siblings).map(number => {
+    const paginationElements = returnPaginationRange(totalPage, slide, limit, siblings).map((number, i) => {
         const classNames = slide === number ? "app-recommended__num app-recommended__num_active" : "app-recommended__num"; //instead of slide was page
         return (
-            <span onClick={() => {setSlide(number); setOffset((number-1)*translateWidth)}} key={number} className={classNames}>{number}</span>
+            <span 
+                onClick={() => {setSlide(number); setOffset((number-1)*translateWidth)}} 
+                key={i} 
+                className={classNames}>
+                {number}
+            </span>
         )
     })
 

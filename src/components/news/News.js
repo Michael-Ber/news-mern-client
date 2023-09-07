@@ -1,18 +1,21 @@
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 import {  fetchNews } from "./NewsSlice";
 import { useSelector, useDispatch } from 'react-redux';
 import CurrentNews from "../current-news/CurrentNews";
 import Popular from "../popular/Popular";
 import './news.scss';
 
-const News = memo(() => {
-    const { country, category } = useSelector(state => state.news);
+const News = () => {
+    const { country, category, showSearchResultCount } = useSelector(state => state.news);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchNews({country, category}))
+        if(!showSearchResultCount) {
+            console.log('here')
+            dispatch(fetchNews({country, category}))
+        }
     }, [category, country])
-
+ 
     return (
         
         <section className="app-main">
@@ -27,6 +30,6 @@ const News = memo(() => {
         
         
     )
-})
+}
 
 export default News;

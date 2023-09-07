@@ -16,7 +16,7 @@ const Popular = memo(({news, category}) => {
         })
     }
 
-    const elements =  renderItems(news);
+    const elements =  news && renderItems(news);
     return (
         <div className="app-main__popular popular-app-main">
             <h1 className="popular-app-main__title">Популярные новости за неделю</h1>

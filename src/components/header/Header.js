@@ -4,17 +4,18 @@ import arrow from './arrow.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { Context } from '../../service/Context';
 import { ContextCountries } from '../../service/ContextCountries';
+import { ContextLanguages } from '../../service/ContextLanguages';
 import { useContext, useState, useRef } from 'react';
-import { categoryChanged, countryChanged } from '../news/NewsSlice';
+import { categoryChanged, countryChanged, fetchSearchNews } from '../news/NewsSlice';
 
 const Header = () => {
     const [showDropDown, setShowDropDown] = useState(false);
-    const {category} = useSelector(state => state.news);
-    const {country} = useSelector(state => state.news);
+    const {category, country, showSearchResultsCount, searchRequest} = useSelector(state => state.news);
     const categories = useContext(Context);
     const categoriesLinks = categories.slice(0, 4);
     const categoriesDropDown = categories.slice(4, categories.length);
     const countries = useContext(ContextCountries);
+    const languages = useContext(ContextLanguages);
     const dispatch = useDispatch();
 
     const burgerContentRef = useRef(null);
@@ -22,10 +23,12 @@ const Header = () => {
     const updateCategory = (category) => {
         dispatch(categoryChanged(category))
     }
-    const updateCountry = (country) => {
-        dispatch(countryChanged(country))
+    const updateCountry = (country, language) => {
+        dispatch(countryChanged({country, language}))
+        if(showSearchResultsCount) {
+            dispatch(fetchSearchNews({category: searchRequest, language}))
+        }
     }
-
     const renderLinks = (arr) => {
         return arr.map(obj => {
             const categoryEn = Object.keys(obj)[0];
@@ -87,13 +90,15 @@ const Header = () => {
         return arr.map(obj => {
             const countryContextRu = Object.values(obj)[0];
             const countryContextEn = Object.keys(obj)[0];
+            const languageContext = Object.values(languages.find(item => item[countryContextEn]))[0];
             const countryClassName = countryContextEn === country ? "app-header__item app-header__item_active" : "app-header__item";
+            const linkTo = showSearchResultsCount ? null :`/${category}`;
             return (
                 <li key={countryContextEn} className={countryClassName}>
                     <Link 
                         className='app-header__link'
-                        onClick={() => updateCountry(countryContextEn)}
-                        to={`/${category}`}>{countryContextRu.toUpperCase()}
+                        onClick={() => updateCountry(countryContextEn, languageContext)}
+                        to={linkTo}>{countryContextRu.toUpperCase()}
                     </Link>
                 </li>
             )

@@ -15,7 +15,6 @@ const LatestPost = memo(({news, category}) => {
     const { request } = useHttp();
     const { apiUrlHeadlines } = newsService();
 
-    console.log('big');
 
     const moreRef = useRef(null);
 

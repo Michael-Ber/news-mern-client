@@ -35,8 +35,6 @@ const Recommended = memo(({news, category}) => {
             <RecommendedItemWithDate key={item.id} />
         )
     }) : <h2>Статей нет</h2>
-    // const listStyleNoArticles = news.length === 0 && {width: '200px'}
-    console.log('render');
     return (
         
         <div className="app-recommended">

@@ -9,10 +9,11 @@ const initialState = {
     moreArticles: [],
     category: 'general',
     country: 'us',
-    language: 'ru',
+    language: 'en',
     amount: 8,
     loadingStatus: 'idle',
-    error: false
+    error: false,
+    showSearchResultsCount: false
 };
 
 export const fetchNews = createAsyncThunk(
@@ -40,7 +41,7 @@ export const fetchSearchNews = createAsyncThunk(
     async({category, language}) => {
         try {
             const { request } = useHttp();
-            const { apiUrlEverything } = newsService({ category, language });
+            const { apiUrlEverything } = newsService();
             return  await request(apiUrlEverything, {
                 method: 'POST',
                 headers: {
@@ -59,11 +60,12 @@ const mainSlice = createSlice({
     name: 'news',
     initialState,
     reducers: {
-        categoryChanged: (state, action) => {state.category = action.payload},
-        countryChanged: (state, action) => {state.country = action.payload},
+        categoryChanged: (state, action) => {state.category = action.payload; state.showSearchResultsCount = false},
+        countryChanged: (state, action) => {state.country = action.payload.country; state.language = action.payload.language},
         searchRequestChanged: (state, action) => {state.searchRequest = action.payload},
         changeAmount: (state) => { state.amount += 8 },
-        loadMoreArticles: (state, action) => { state.moreArticles = [...state.moreArticles, ...action.payload] }
+        setShowSearchResultsCount: state => {state.showSearchResultsCount = true },
+        resetShowSearchResultsCount: state => {state.showSearchResultsCount = false },
     },
     extraReducers: builder => {
         builder 
@@ -90,5 +92,7 @@ export const {
     fetchedSearchNEws,
     fetchingSearchNEwsError,
     changeAmount,
-    loadMoreArticles
+    loadMoreArticles,
+    setShowSearchResultsCount,
+    resetShowSearchResultsCount
 } = actions;

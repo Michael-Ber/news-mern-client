@@ -4,28 +4,24 @@ import { fetchSearchNews } from '../news/NewsSlice';
 import withDate from '../HOC/withDate';
 import SearchResultItem from '../../components/search/SearchResultItem';
 import './searchResult.scss';
-import { nanoid } from '@reduxjs/toolkit';
 
 const SearchResult = () => {
     const news = useSelector(state => state.news.searchedArticles);
-    const searchRequest = localStorage.getItem('searchRequest');
+    // const searchRequest = localStorage.getItem('searchRequest');
+    const { searchRequest } = useSelector(state => state.news)
     const { language } = useSelector(state => state.news);
     const dispatch = useDispatch();
-
     const renderNews = (arr) => {
-        return arr.map((item, i) => {
+        return arr.map(item => {
             const SearchResultItemWithDate = withDate(SearchResultItem, {...item});
             return (
-                <SearchResultItemWithDate key={nanoid()} />
+                <SearchResultItemWithDate key={item.id} />
             )
         })
     }
-    useEffect(() => {
-        dispatch(fetchSearchNews({category: searchRequest, language}))
-    }, [searchRequest])
 
     
-    const elements = renderNews(news);
+    const elements = news && renderNews(news);
     return (
         <div className="app-search-page search-page">
             <h2 className='search-page__title'>Новости</h2>

@@ -7,7 +7,7 @@ import './currentNews.scss';
 import withDate from '../HOC/withDate';
 
 const CurrentNews = memo(({news, category}) => {
-    const [firstNews] = news;
+    const firstNews = news.length > 0 ? news[0]: null;
     const [currentNews, setCurrentNews] = useState(firstNews);
     const [activeNews, setActiveNews] = useState(0);
     const handleNews = useCallback((i) => {
