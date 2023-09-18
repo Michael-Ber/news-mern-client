@@ -35,7 +35,6 @@ const Main = () => {
                 </ErrorBoundary>
                 <ErrorBoundary>
                     <LatestPost/>
-                    {/* <div className='app-latest__btn'></div> */}
                 </ErrorBoundary>
                 <ErrorBoundary>
                     {<CSSTransition 

@@ -9,8 +9,6 @@ const NewsItem = ({ title, urlToImage, elementNumber, handleNews, activeNews}) =
     }
     const modifiedTitle = title && renderTitle(title);
     const editedImg = urlToImage ? urlToImage : noImage;
-
-    // console.log(urlToImage);
     return (
         <div onClick={handleNews} className={classNames}>
             <div className="tabs-app-main__img">

@@ -26,7 +26,6 @@ const Search = () => {
         setRequest('');
         nav(`/search_results`);
         dispatch(setShowSearchResultsCount());
-        // setShowResultsResolution(true);
     }
 
     const showSpinner = loadingStatus === 'loading' ? <Spinner customStyle={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', width: '20px', height: '20px'}} /> : null;

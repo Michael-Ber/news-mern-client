@@ -4,6 +4,7 @@
     padding: 80px 105px 50px 105px;
     background-color: #909090;
     color: #fff;
+    min-height: 100vh;
     @media(max-width: 1199px) {
         padding: 80px 50px 50px 50px;
     }
@@ -16,7 +17,7 @@
     }
     &__left {
         flex: 0 0 calc(60% - 60px);
-        
+        height: 100%;
         @media(max-width: 1299px) {
             flex: 0 0 calc(50% - 60px);
         }
@@ -26,6 +27,7 @@
     }
     &__right {
         flex: 0 0 calc(40% - 60px);
+        height: 100%;
         @media(max-width: 1299px) {
             flex: 0 0 calc(50% - 60px);
         }
