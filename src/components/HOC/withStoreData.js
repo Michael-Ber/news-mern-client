@@ -7,11 +7,12 @@ const withStoreData = (WrappedComponent) => {
         const { category } = useSelector(state => state.news);
         const news = useSelector(state => state.news.articles);
 
-        if(loadingStatus === 'loading') {
+        if (loadingStatus === 'loading') {
             return <Spinner />
-        }else if(news.length === 0) {
+        } else if (news.length === 0) {
             return <h2>Статей нет</h2>
         }
+
 
         return (
             <WrappedComponent news={news} category={category} />

@@ -10,7 +10,7 @@ import { categoryChanged, countryChanged, fetchSearchNews } from '../news/NewsSl
 
 const Header = () => {
     const [showDropDown, setShowDropDown] = useState(false);
-    const {category, country, showSearchResultsCount, searchRequest} = useSelector(state => state.news);
+    const { category, country, showSearchResultsCount, searchRequest } = useSelector(state => state.news);
     const categories = useContext(Context);
     const categoriesLinks = categories.slice(0, 4);
     const categoriesDropDown = categories.slice(4, categories.length);
@@ -24,42 +24,42 @@ const Header = () => {
         dispatch(categoryChanged(category))
     }
     const updateCountry = (country, language) => {
-        dispatch(countryChanged({country, language}))
-        if(showSearchResultsCount) {
-            dispatch(fetchSearchNews({category: searchRequest, language}))
+        dispatch(countryChanged({ country, language }))
+        if (showSearchResultsCount) {
+            dispatch(fetchSearchNews({ category: searchRequest, language }))
         }
     }
     const renderLinks = (arr) => {
         return arr.map(obj => {
             const categoryEn = Object.keys(obj)[0];
             const categoryRu = Object.values(obj)[0];
-            const linkClassName = category === categoryEn ? "app-header__item app-header__item_active": "app-header__item";
+            const linkClassName = category === categoryEn ? "app-header__item app-header__item_active" : "app-header__item";
             return (
                 <li key={categoryEn} className={linkClassName}>
                     <Link
-                        className='app-header__link' 
+                        className='app-header__link'
                         onClick={() => updateCategory(categoryEn)}
-                        to={`/${categoryEn}`}>{categoryRu}
+                        to={`/category/${categoryEn}`}>{categoryRu}
                     </Link>
                 </li>
             )
-            
-            
+
+
         })
     }
 
 
     const renderDropoDownItems = (arr) => {
-        const dropDownStyles = showDropDown ? {height: `${(arr.length+1)*(20+15) - 15}px`}: {height: '20px'}
+        const dropDownStyles = showDropDown ? { height: `${(arr.length + 1) * (20 + 15) - 15}px` } : { height: '20px' }
         return (
             <div className="app-header__dropdown-wrapper">
-                <div 
+                <div
                     onClick={() => setShowDropDown(state => !state)}
                     className="app-header__dropdown-container">
                     <div className="app-header__dropdown-arrow">
-                        <img style={{transform: 'rotate(90deg)'}} src={arrow} alt="bottom arrow" />
+                        <img style={{ transform: 'rotate(90deg)' }} src={arrow} alt="bottom arrow" />
                     </div>
-                    <ul 
+                    <ul
                         style={dropDownStyles}
                         className='app-header__dropdown-subwrapper'>
                         <li className='app-header__dropdown-more'>Еще</li>
@@ -69,17 +69,17 @@ const Header = () => {
                                 const value = Object.keys(obj)[0];
                                 return (
                                     <li key={i} className="app-header__dropdown-item">
-                                        <Link 
+                                        <Link
                                             to={`${value}`}
                                             onClick={() => updateCategory(value)}
-                                            className='app-header__dropdown-link' 
-                                            >
-                                                {category}
+                                            className='app-header__dropdown-link'
+                                        >
+                                            {category}
                                         </Link>
                                     </li>
-                                    
+
                                 )
-                            })                        
+                            })
                         }
                     </ul>
                 </div>
@@ -92,10 +92,10 @@ const Header = () => {
             const countryContextEn = Object.keys(obj)[0];
             const languageContext = Object.values(languages.find(item => item[countryContextEn]))[0];
             const countryClassName = countryContextEn === country ? "app-header__item app-header__item_active" : "app-header__item";
-            const linkTo = showSearchResultsCount ? null :`/${category}`;
+            const linkTo = showSearchResultsCount ? null : `/${category}`;
             return (
                 <li key={countryContextEn} className={countryClassName}>
-                    <Link 
+                    <Link
                         className='app-header__link'
                         onClick={() => updateCountry(countryContextEn, languageContext)}
                         to={linkTo}>{countryContextRu.toUpperCase()}
@@ -109,14 +109,14 @@ const Header = () => {
         return arr.map((obj, i) => {
             const categoryEn = Object.keys(obj)[0];
             const categoryRu = Object.values(obj)[0];
-            const linkClassName = category === categoryEn ? "burger-app-header__link burger-app-header__link_active": "burger-app-header__link";
+            const linkClassName = category === categoryEn ? "burger-app-header__link burger-app-header__link_active" : "burger-app-header__link";
             return (
                 <li key={i} className="burger-app-header__item">
-                    <Link 
-                        to={`/${categoryEn}`} 
+                    <Link
+                        to={`/${categoryEn}`}
                         onClick={closeBurgerMenu}
                         className={linkClassName}>
-                            {categoryRu}
+                        {categoryRu}
                     </Link>
                 </li>
             )
@@ -138,8 +138,8 @@ const Header = () => {
     return (
         <div className="app-header">
             <div className="app-header__burger burger-app-header">
-                <div 
-                    onClick={openBurgerMenu} 
+                <div
+                    onClick={openBurgerMenu}
                     className="burger-app-header__btn">
                     <span className='burger-app-header__line'></span>
                     <span className='burger-app-header__line'></span>
@@ -147,11 +147,11 @@ const Header = () => {
                 </div>
                 <div ref={burgerContentRef} className="burger-app-header__content">
                     <ul className="burger-app-header__list">
-                        <div
-                            onClick={closeBurgerMenu} 
+                        <li
+                            onClick={closeBurgerMenu}
                             className="burger-app-header__close">
-                                &#x2715;
-                        </div>
+                            &#x2715;
+                        </li>
                         {burgerItems}
                     </ul>
                 </div>

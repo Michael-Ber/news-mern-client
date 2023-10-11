@@ -1,0 +1,21 @@
+.wrapper404 {
+    padding: 100px;
+
+    p {
+        text-align: center;
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    a {
+        display: block;
+        text-align: center;
+        color: blue;
+
+        &:hover {
+            color: darken(blue, 20%);
+            text-decoration: underline;
+        }
+    }
+
+}
