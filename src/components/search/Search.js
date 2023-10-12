@@ -9,7 +9,7 @@ import Spinner from '../spinner/Spinner';
 import { fetchSearchNews } from '../news/NewsSlice';
 
 const Search = () => {
-    const {loadingStatus} = useSelector(state=>state.news)
+    const { loadingStatus } = useSelector(state => state.news)
     // const [showResultsResolution, setShowResultsResolution] = useState(false);
     const { showSearchResultsCount } = useSelector(state => state.news)
     const [request, setRequest] = useState('');
@@ -21,16 +21,16 @@ const Search = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(searchRequestChanged(request));
-        dispatch(fetchSearchNews({category: request, language}))
+        dispatch(fetchSearchNews({ category: request, language }))
         localStorage.setItem('searchRequest', request);
         setRequest('');
-        nav(`/search_results`);
+        nav(`/search_results`, { replace: true });
         dispatch(setShowSearchResultsCount());
     }
 
-    const showSpinner = loadingStatus === 'loading' ? <Spinner customStyle={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', width: '20px', height: '20px'}} /> : null;
+    const showSpinner = loadingStatus === 'loading' ? <Spinner customStyle={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', width: '20px', height: '20px' }} /> : null;
     const showResults = (arr) => {
-        if(arr) {
+        if (arr) {
             const length = arr.length;
             const resultsCount = length > 0 ? <h5>Найдено: {length} статей</h5> : <h5>По вашему запросу ничего не найдено</h5>
             return (
@@ -40,27 +40,27 @@ const Search = () => {
         return null
     }
     const results = showResults(searchNews);
-    const resultsStyles = showSearchResultsCount ? {display: 'block'}: {display: 'none'};
+    const resultsStyles = showSearchResultsCount ? { display: 'block' } : { display: 'none' };
     return (
-    <div className="app-search search-app">
-        <div className="search-app__logo">World News</div>
-        <div className="search-app__wrapper">
-            <form onSubmit={handleSubmit} className="search-app__form">
-                <input 
-                    value={request}
-                    onChange={(e) => setRequest(e.target.value)}
-                    placeholder='Поиск' 
-                    type="text" id='news' 
-                    name='news' 
-                    className="search-app__input" />
-                    
-                <button className="search-app__btn" type='submit'>
-                    {showSpinner ? showSpinner : <img src={searchIcon} alt="search button" />}
-                </button>
-            </form>
-            <div style={resultsStyles} className="search-app__results">{results}</div>
+        <div className="app-search search-app">
+            <div className="search-app__logo">World News</div>
+            <div className="search-app__wrapper">
+                <form onSubmit={handleSubmit} className="search-app__form">
+                    <input
+                        value={request}
+                        onChange={(e) => setRequest(e.target.value)}
+                        placeholder='Поиск'
+                        type="text" id='news'
+                        name='news'
+                        className="search-app__input" />
+
+                    <button className="search-app__btn" type='submit'>
+                        {showSpinner ? showSpinner : <img src={searchIcon} alt="search button" />}
+                    </button>
+                </form>
+                <div style={resultsStyles} className="search-app__results">{results}</div>
+            </div>
         </div>
-    </div>
     )
 }
 

@@ -25,18 +25,25 @@ function App() {
 
 
 	useEffect(() => {
-		if (categoryFromUrl !== '/') dispatch(categoryChanged(categoryFromUrl))
-		if (categoryFromUrl !== 'search_results') dispatch(resetShowSearchResultsCount())
+		if (categoryFromUrl === '/') {
+			nav(`/category/general`)
+		} else {
+			dispatch(categoryChanged(categoryFromUrl));
+		}
+		if (categoryFromUrl !== '/search_results') dispatch(resetShowSearchResultsCount())
 
-	}, [categoryFromUrl, dispatch])
+	}, [categoryFromUrl, dispatch, nav])
 
-	console.log(uri)
+	// useEffect(() => {
+
+	// 	nav(`/category/${category}`);
 
 
-	useEffect(() => {
-		nav(`/category/${category}`);
+	// }, [category])
 
-	}, [category, nav])
+
+
+
 	// useEffect(() => {
 
 	// 	if (categoryFromUrl !== 'search_results') {
