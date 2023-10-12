@@ -21,7 +21,7 @@ const Main = () => {
             setShowRecom(false);
         }
     }
-
+    
     useEffect(() => {
         window.addEventListener('scroll', scrollHandler);
         return () => { window.removeEventListener('scroll', scrollHandler) }
