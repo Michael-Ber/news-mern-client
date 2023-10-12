@@ -18,25 +18,38 @@ const Main = lazy(() => import('../pages/Main.js'))
 function App() {
 	const nav = useNavigate();
 	const urlActual = useLocation().pathname;
-	const categoryFromUrl = urlActual.slice(1, urlActual.length);
+	const categoryFromUrl = urlActual.replace(/\/category\//, '');
 	const dispatch = useDispatch();
 	const { category } = useSelector(state => state.news)
 
 
 	useEffect(() => {
+		if (categoryFromUrl !== '/') dispatch(categoryChanged(categoryFromUrl))
+		if (categoryFromUrl !== 'search_results') dispatch(resetShowSearchResultsCount())
 
-		if (categoryFromUrl !== 'search_results') {
-			dispatch(resetShowSearchResultsCount())
-			console.log(categoryFromUrl)
-			dispatch(categoryChanged(urlActual.replace(/\/category\//, '')))
-		}
-	}, [categoryFromUrl])
+	}, [categoryFromUrl, dispatch])
+
+	console.log(urlActual, categoryFromUrl)
 
 
 	useEffect(() => {
-		nav(`/category/${urlActual.replace(/\/category\//, '')}`);
+		nav(`/category/${category}`);
 
-	}, [])
+	}, [category, nav])
+	// useEffect(() => {
+
+	// 	if (categoryFromUrl !== 'search_results') {
+	// 		dispatch(resetShowSearchResultsCount())
+	// 		console.log(categoryFromUrl)
+	// 		dispatch(categoryChanged(urlActual.replace(/\/category\//, '')))
+	// 	}
+	// }, [categoryFromUrl])
+
+
+	// useEffect(() => {
+	// 	nav(`/category/${urlActual.replace(/\/category\//, '')}`);
+
+	// }, [])
 
 
 
