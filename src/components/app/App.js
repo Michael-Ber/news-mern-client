@@ -17,6 +17,7 @@ const Main = lazy(() => import('../pages/Main.js'))
 
 function App() {
 	const nav = useNavigate();
+	const uri = useLocation();
 	const urlActual = useLocation().pathname;
 	const categoryFromUrl = urlActual.replace(/\/category\//, '');
 	const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function App() {
 
 	}, [categoryFromUrl, dispatch])
 
-	console.log(urlActual, categoryFromUrl)
+	console.log(uri)
 
 
 	useEffect(() => {
