@@ -92,7 +92,7 @@ const Header = () => {
             const countryContextEn = Object.keys(obj)[0];
             const languageContext = Object.values(languages.find(item => item[countryContextEn]))[0];
             const countryClassName = countryContextEn === country ? "app-header__item app-header__item_active" : "app-header__item";
-            const linkTo = showSearchResultsCount ? null : `/${category}`;
+            const linkTo = showSearchResultsCount ? null : `/category/${category}`;
             return (
                 <li key={countryContextEn} className={countryClassName}>
                     <Link

@@ -20,7 +20,7 @@ const LatestPost = memo(({ news, category }) => {
 
     const handleMore = async () => {
         moreRef.current.disabled = true;
-        const articles = await request(apiUrlHeadlines, {
+        const articles = await request(`${apiUrlHeadlines}/${category}`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

@@ -17,11 +17,9 @@ const Main = lazy(() => import('../pages/Main.js'))
 
 function App() {
 	const nav = useNavigate();
-	const uri = useLocation();
 	const urlActual = useLocation().pathname;
 	const categoryFromUrl = urlActual.replace(/\/category\//, '');
 	const dispatch = useDispatch();
-	const { category } = useSelector(state => state.news)
 
 
 	useEffect(() => {
